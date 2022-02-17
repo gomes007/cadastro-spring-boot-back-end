@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 public class Funcionario implements Serializable{
@@ -26,16 +28,25 @@ public class Funcionario implements Serializable{
 	private String email;
 	private String cpf;
 	private String telefone;
+	private Date dataNascimento;
+	private String estadoCivil; //radio button
+	private String sexo; //radio button
+	private String coding; //check box
+	private Boolean disponivelViagens; //switch
+	
+	
 	
 
-	private Date dataNascimento;
-	
 	
 	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 
-	public Funcionario(Long id, String nome, String email, String cpf, String telefone, Date dataNascimento) {
+	
+
+
+	public Funcionario(Long id, String nome, String email, String cpf, String telefone, Date dataNascimento,
+			String estadoCivil, String sexo, String coding, List<Endereco> enderecos) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -43,7 +54,10 @@ public class Funcionario implements Serializable{
 		this.cpf = cpf;
 		this.telefone = telefone;
 		this.dataNascimento = dataNascimento;
-		
+		this.estadoCivil = estadoCivil;
+		this.sexo = sexo;
+		this.coding = coding;
+		this.enderecos = enderecos;
 	}
 
 
@@ -120,6 +134,36 @@ public class Funcionario implements Serializable{
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+	
+	
+	public String getEstadoCivil() {
+		return estadoCivil;
+	}
+
+
+	public void setEstadoCivil(String estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+
+	public String getSexo() {
+		return sexo;
+	}
+
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+
+
+	public String getCoding() {
+		return coding;
+	}
+
+
+	public void setCoding(String coding) {
+		this.coding = coding;
+	}
 
 
 	@Override
@@ -138,6 +182,16 @@ public class Funcionario implements Serializable{
 			return false;
 		Funcionario other = (Funcionario) obj;
 		return Objects.equals(id, other.id);
+	}
+
+
+	public Boolean getDisponivelViagens() {
+		return disponivelViagens;
+	}
+
+
+	public void setDisponivelViagens(Boolean disponivelViagens) {
+		this.disponivelViagens = disponivelViagens;
 	}
 	
 	
