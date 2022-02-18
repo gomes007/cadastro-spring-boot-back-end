@@ -58,6 +58,13 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		repository.delete(funcionario);
 
 	}
+	
+	
+	
+
+	
+	
+	
 
 	@Override
 	@Transactional(readOnly = true)
@@ -69,6 +76,10 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		return repository.findAll(example);
 	}
 
+	
+	
+	
+	
 	@Override
 	public void validar(Funcionario func) {
 
@@ -77,6 +88,9 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		}
 
 	}
+	
+	
+	
 
 	@Override
 	public List<Funcionario> findAll() {
@@ -84,22 +98,34 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		return repository.findAll();
 	}
 
+	
+	
+	
 	public List<Funcionario> localizaAll() {
 
 		return repository.findAll();
 	}
 
+	
+	
+	
 	@Override
 	public Optional<Funcionario> obterPorId(Long id) {
 
 		return repository.findById(id);
 	}
+	
+	
+	
 
 	@Override
 	public Funcionario fromDTO(FuncionarioDTO objDTO) {
 
 		return new Funcionario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null, null, null, null, null);
 	}
+	
+	
+	
 
 	@Override
 	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
