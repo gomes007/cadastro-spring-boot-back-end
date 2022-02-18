@@ -11,12 +11,15 @@ import org.springframework.data.domain.ExampleMatcher.StringMatcher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.fullstack.crud.api.dto.FuncionarioDTO;
+import com.example.fullstack.crud.api.dto.FuncionarioNewDTO;
 import com.example.fullstack.crud.exception.RegraNegocioException;
+import com.example.fullstack.crud.model.entity.Cidade;
+import com.example.fullstack.crud.model.entity.Endereco;
 import com.example.fullstack.crud.model.entity.Funcionario;
 import com.example.fullstack.crud.model.repository.EnderecoRepository;
 import com.example.fullstack.crud.model.repository.FuncionarioRepository;
 import com.example.fullstack.crud.service.FuncionarioService;
-
 
 @Service
 public class FuncionarioServiceImplementacao implements FuncionarioService {
@@ -29,16 +32,9 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 
 	@Override
 	@Transactional
-	public Funcionario salvar(Funcionario funcionario) {
-		validar(funcionario);
-
-		funcionario = repository.save(funcionario);
-
-		enderecoRepository.saveAll(funcionario.getEnderecos()); // ver se precisa dessa linha
-
-		return funcionario;
-
-		// return repository.save(funcionario);
+	public Funcionario salvar(Funcionario obj) {
+		obj.setId(null);
+		return repository.save(obj);
 	}
 
 	@Override
@@ -73,9 +69,6 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		return repository.findAll(example);
 	}
 
-
-	
-
 	@Override
 	public void validar(Funcionario func) {
 
@@ -87,25 +80,46 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 
 	@Override
 	public List<Funcionario> findAll() {
-		
+
 		return repository.findAll();
 	}
-	
-public List<Funcionario> localizaAll() {
-		
+
+	public List<Funcionario> localizaAll() {
+
 		return repository.findAll();
 	}
-	
-	
 
 	@Override
 	public Optional<Funcionario> obterPorId(Long id) {
-		
+
 		return repository.findById(id);
 	}
-	
-	
-	
-	
+
+	@Override
+	public Funcionario fromDTO(FuncionarioDTO objDTO) {
+
+		return new Funcionario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null, null, null, null, null);
+	}
+
+	@Override
+	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
+
+		Funcionario func = new Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpf(), objDTO.getTelefone(),
+				objDTO.getDataNascimento(), objDTO.getEstadoCivil(), objDTO.getSexo(), objDTO.getCoding(),
+				objDTO.getDisponivelViagens());
+				
+		
+		Cidade cid = new Cidade(objDTO.getCidadeId(), null, null);
+		
+		
+		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), func, cid);
+		
+		
+		func.getEnderecos().add(end);
+		
+		return func;
+		
+		
+	}
 
 }

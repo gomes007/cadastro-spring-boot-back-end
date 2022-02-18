@@ -16,10 +16,11 @@ public class FuncionarioDTO implements Serializable {
 	
 
 	
+	public FuncionarioDTO() {
+		super();
+	}
 	
 	
-	
-
 
 	public FuncionarioDTO(Funcionario obj) {
 		id = obj.getId();
@@ -28,10 +29,6 @@ public class FuncionarioDTO implements Serializable {
 	}
 
 
-
-	public FuncionarioDTO() {
-		
-	}
 	
 	
 	

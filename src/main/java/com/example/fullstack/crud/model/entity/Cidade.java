@@ -17,8 +17,7 @@ public class Cidade implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
+	private Long id;	
 	private String nome;
 	
 	
@@ -29,12 +28,10 @@ public class Cidade implements Serializable{
 
 
 	public Cidade() {
-		super();
+		
 	}
 	
-	
-	
-	
+		
 
 
 	public Cidade(Long id, String nome, Estado estado) {

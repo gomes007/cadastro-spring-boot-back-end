@@ -13,7 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -28,7 +28,10 @@ public class Funcionario implements Serializable{
 	private String email;
 	private String cpf;
 	private String telefone;
+	
+	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
+	
 	private String estadoCivil; //radio button
 	private String sexo; //radio button
 	private String coding; //check box
@@ -42,11 +45,9 @@ public class Funcionario implements Serializable{
 	private List<Endereco> enderecos = new ArrayList<>();
 
 
-	
-
 
 	public Funcionario(Long id, String nome, String email, String cpf, String telefone, Date dataNascimento,
-			String estadoCivil, String sexo, String coding, List<Endereco> enderecos) {
+			String estadoCivil, String sexo, String coding, Boolean disponivelViagens) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -57,7 +58,7 @@ public class Funcionario implements Serializable{
 		this.estadoCivil = estadoCivil;
 		this.sexo = sexo;
 		this.coding = coding;
-		this.enderecos = enderecos;
+		this.disponivelViagens = disponivelViagens;
 	}
 
 

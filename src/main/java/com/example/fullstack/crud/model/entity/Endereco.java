@@ -3,12 +3,15 @@ package com.example.fullstack.crud.model.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
@@ -26,14 +29,14 @@ public class Endereco implements Serializable{
 	private String cep;
 
 	
-	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "func_id")
 	private Funcionario funcionario;
 	
 	
 
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "cidade_id")
 	private Cidade cidade;
 	
@@ -42,8 +45,6 @@ public class Endereco implements Serializable{
 	public Endereco() {
 		super();
 	}
-
-
 
 
 
@@ -57,7 +58,7 @@ public class Endereco implements Serializable{
 		this.bairro = bairro;
 		this.cep = cep;
 		this.funcionario = funcionario;
-		this.cidade = cidade;
+		this.setCidade(cidade);
 	}
 
 
