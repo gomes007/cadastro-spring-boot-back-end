@@ -34,20 +34,29 @@ public class Funcionario implements Serializable{
 	
 	private String estadoCivil; //radio button
 	private String sexo; //radio button
-	private String coding; //check box
-	private Boolean disponivelViagens; //switch
+	private String [] coding; //check box
+	private boolean podeViajar; //switch
 	
+	
+	
+	public String getCodingFormat() {
+		StringBuilder elementsBuilder = new StringBuilder();
+		for (String f : coding) {
+			elementsBuilder.append(f).append(",");
+		}
+		return elementsBuilder.toString();
+	}
+
 	
 	
 
-	
 	@OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
 	private List<Endereco> enderecos = new ArrayList<>();
 
 
 
 	public Funcionario(Long id, String nome, String email, String cpf, String telefone, Date dataNascimento,
-			String estadoCivil, String sexo, String coding, Boolean disponivelViagens) {
+			String estadoCivil, String sexo, String [] coding, boolean podeViajar) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -58,8 +67,12 @@ public class Funcionario implements Serializable{
 		this.estadoCivil = estadoCivil;
 		this.sexo = sexo;
 		this.coding = coding;
-		this.disponivelViagens = disponivelViagens;
+		this.podeViajar = podeViajar;
+		
+		
 	}
+	
+	
 
 
 	public Funcionario() {
@@ -157,14 +170,15 @@ public class Funcionario implements Serializable{
 	}
 
 
-	public String getCoding() {
+	public String [] getCoding() {
 		return coding;
 	}
 
-
-	public void setCoding(String coding) {
+	public void setCoding(String [] coding) {
 		this.coding = coding;
 	}
+	
+
 
 
 	@Override
@@ -186,14 +200,20 @@ public class Funcionario implements Serializable{
 	}
 
 
-	public Boolean getDisponivelViagens() {
-		return disponivelViagens;
+	public boolean getDisponivelViagens() {
+		return podeViajar;
 	}
 
 
-	public void setDisponivelViagens(Boolean disponivelViagens) {
-		this.disponivelViagens = disponivelViagens;
+	public void setDisponivelViagens(boolean disponivelViagens) {
+		this.podeViajar = disponivelViagens;
 	}
+
+
+
+
+
+
 	
 	
 	

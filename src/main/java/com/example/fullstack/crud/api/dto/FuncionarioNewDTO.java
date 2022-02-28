@@ -3,8 +3,6 @@ package com.example.fullstack.crud.api.dto;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.example.fullstack.crud.model.entity.Funcionario;
-
 
 
 public class FuncionarioNewDTO implements Serializable {
@@ -17,8 +15,8 @@ public class FuncionarioNewDTO implements Serializable {
 	private Date dataNascimento;
 	private String estadoCivil; //radio button
 	private String sexo; //radio button
-	private String coding; //check box
-	private Boolean disponivelViagens; //switch
+	private String [] coding; //check box
+	private boolean podeViajar; //switch
 	
 	private String logradouro;
 	private String numero;
@@ -34,8 +32,20 @@ public class FuncionarioNewDTO implements Serializable {
 
 	public FuncionarioNewDTO() {
 		super();
+		
 	}
 
+
+	
+	public String getCodingFormat() {
+		StringBuilder elementsBuilder = new StringBuilder();
+		for (String f : coding) {
+			elementsBuilder.append(f).append(",");
+		}
+		return elementsBuilder.toString();
+	}
+	
+	
 	public String getNome() {
 		return nome;
 	}
@@ -92,21 +102,9 @@ public class FuncionarioNewDTO implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public String getCoding() {
-		return coding;
-	}
 
-	public void setCoding(String coding) {
-		this.coding = coding;
-	}
 
-	public Boolean getDisponivelViagens() {
-		return disponivelViagens;
-	}
 
-	public void setDisponivelViagens(Boolean disponivelViagens) {
-		this.disponivelViagens = disponivelViagens;
-	}
 
 	public String getLogradouro() {
 		return logradouro;
@@ -155,7 +153,27 @@ public class FuncionarioNewDTO implements Serializable {
 	public void setCidadeId(Long cidadeId) {
 		this.cidadeId = cidadeId;
 	}
-	
+
+	public boolean getPodeViajar() {
+		return podeViajar;
+	}
+
+	public void setPodeViajar(boolean podeViajar) {
+		this.podeViajar = podeViajar;
+	}
+
+	public String [] getCoding() {
+		 
+		return coding;
+	}
+
+	public void setCoding(String [] coding) {
+		
+		this.coding = coding;
+	}
+
+
+
 	
 	
 	

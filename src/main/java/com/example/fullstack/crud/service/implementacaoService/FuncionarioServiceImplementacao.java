@@ -27,13 +27,13 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 	@Autowired
 	private FuncionarioRepository repository;
 
-	@Autowired
-	private EnderecoRepository enderecoRepository;
 
 	@Override
 	@Transactional
 	public Funcionario salvar(Funcionario obj) {
+		
 		obj.setId(null);
+		
 		return repository.save(obj);
 	}
 
@@ -44,6 +44,8 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		Objects.requireNonNull(obj.getId());
 
 		validar(obj);
+		
+		
 
 		return repository.save(obj);
 
@@ -121,7 +123,7 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 	@Override
 	public Funcionario fromDTO(FuncionarioDTO objDTO) {
 
-		return new Funcionario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null, null, null, null, null);
+		return new Funcionario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null, null, null, null, false);
 	}
 	
 	
@@ -132,7 +134,7 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 
 		Funcionario func = new Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpf(), objDTO.getTelefone(),
 				objDTO.getDataNascimento(), objDTO.getEstadoCivil(), objDTO.getSexo(), objDTO.getCoding(),
-				objDTO.getDisponivelViagens());
+				objDTO.getPodeViajar());
 				
 		
 		Cidade cid = new Cidade(objDTO.getCidadeId(), null, null);

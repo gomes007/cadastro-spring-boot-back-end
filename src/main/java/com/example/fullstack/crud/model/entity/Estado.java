@@ -21,9 +21,8 @@ public class Estado implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	private String nome;
+	private Long id;	
+	private String uf;
 	
 	
 	@JsonIgnore
@@ -32,10 +31,10 @@ public class Estado implements Serializable{
 	
 	
 
-	public Estado(Long id, String nome, List<Cidade> cidades) {
+	public Estado(Long id, String uf, List<Cidade> cidades) {
 		super();
 		this.id = id;
-		this.nome = nome;
+		this.uf = uf;
 		this.cidades = cidades;
 	}
 	
@@ -58,11 +57,11 @@ public class Estado implements Serializable{
 	}
 
 	public String getNome() {
-		return nome;
+		return uf;
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		this.uf = nome;
 	}
 
 	public List<Cidade> getCidades() {
