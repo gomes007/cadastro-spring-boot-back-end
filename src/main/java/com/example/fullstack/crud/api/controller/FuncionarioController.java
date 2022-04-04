@@ -65,6 +65,7 @@ public class FuncionarioController {
 			Funcionario obj = service.fromDTO(objDTO);
 			
 			obj = service.salvar(obj);
+			service.salvarEnderecos(obj,objDTO.getEnderecos());
 			
 			return new ResponseEntity(obj, HttpStatus.CREATED);
 

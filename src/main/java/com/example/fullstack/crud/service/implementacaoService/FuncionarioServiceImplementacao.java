@@ -1,5 +1,6 @@
 package com.example.fullstack.crud.service.implementacaoService;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import com.example.fullstack.crud.api.dto.FuncionarioNewDTO;
 import com.example.fullstack.crud.exception.RegraNegocioException;
 import com.example.fullstack.crud.model.entity.Cidade;
 import com.example.fullstack.crud.model.entity.Endereco;
+import com.example.fullstack.crud.model.entity.Estado;
 import com.example.fullstack.crud.model.entity.Funcionario;
 import com.example.fullstack.crud.model.repository.EnderecoRepository;
 import com.example.fullstack.crud.model.repository.FuncionarioRepository;
@@ -27,7 +29,9 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 	@Autowired
 	private FuncionarioRepository repository;
 
-
+	@Autowired
+	private EnderecoRepository enderecoRepository;
+	
 	@Override
 	@Transactional
 	public Funcionario salvar(Funcionario obj) {
@@ -36,6 +40,22 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 		
 		return repository.save(obj);
 	}
+	
+	@Override
+	@Transactional
+	public void salvarEnderecos(Funcionario funcionario, Endereco[] enderecos) {
+		
+		List<Endereco> itens = Arrays.asList(enderecos);
+		itens.forEach(endereco->{
+				endereco.setFuncionario(funcionario);
+				this.enderecoRepository.save(endereco);
+			}
+		);
+		
+		
+	}
+	
+	
 
 	@Override
 	@Transactional
@@ -123,7 +143,7 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 	@Override
 	public Funcionario fromDTO(FuncionarioDTO objDTO) {
 
-		return new Funcionario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null, null, null, null, false);
+		return new Funcionario(objDTO.getId(), objDTO.getNome(), objDTO.getEmail(), null, null, null, null, null, null, false, null);
 	}
 	
 	
@@ -133,20 +153,19 @@ public class FuncionarioServiceImplementacao implements FuncionarioService {
 	public Funcionario fromDTO(FuncionarioNewDTO objDTO) {
 
 		Funcionario func = new Funcionario(null, objDTO.getNome(), objDTO.getEmail(), objDTO.getCpf(), objDTO.getTelefone(),
-				objDTO.getDataNascimento(), objDTO.getEstadoCivil(), objDTO.getSexo(), objDTO.getCoding(),
-				objDTO.getPodeViajar());
-				
-		
-		Cidade cid = new Cidade(objDTO.getCidadeId(), null, null);
+				objDTO.getDataNascimento(), objDTO.getEstadoCivil(), objDTO.getSexo(), objDTO.getCoding(), objDTO.getPodeViajar(), objDTO.getOutrasInfo());						
 		
 		
-		Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), func, cid);
+		Estado uf = new Estado(objDTO.getEstadoId(), objDTO.getUf(), null);
+		
+		Cidade cid = new Cidade(objDTO.getCidadeId(), objDTO.getNome_cidade(), uf);
+		
+		//Endereco end = new Endereco(null, objDTO.getLogradouro(), objDTO.getNumero(), objDTO.getComplemento(), objDTO.getBairro(), objDTO.getCep(), func, cid);
 		
 		
-		func.getEnderecos().add(end);
+		//func.getEnderecos().add(end);
 		
-		return func;
-		
+		return func;		
 		
 	}
 

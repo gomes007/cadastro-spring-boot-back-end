@@ -56,13 +56,21 @@ public class Estado implements Serializable{
 		this.id = id;
 	}
 
-	public String getNome() {
+
+
+	public String getUf() {
 		return uf;
 	}
 
-	public void setNome(String nome) {
-		this.uf = nome;
+
+
+
+	public void setUf(String uf) {
+		this.uf = uf;
 	}
+
+
+
 
 	public List<Cidade> getCidades() {
 		return cidades;

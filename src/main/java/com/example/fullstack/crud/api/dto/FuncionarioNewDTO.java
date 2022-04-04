@@ -3,6 +3,8 @@ package com.example.fullstack.crud.api.dto;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.example.fullstack.crud.model.entity.Endereco;
+
 
 
 public class FuncionarioNewDTO implements Serializable {
@@ -13,19 +15,34 @@ public class FuncionarioNewDTO implements Serializable {
 	private String cpf;
 	private String telefone;
 	private Date dataNascimento;
-	private String estadoCivil; //radio button
+	private String [] estadoCivil; //dropdownlist
 	private String sexo; //radio button
 	private String [] coding; //check box
 	private boolean podeViajar; //switch
 	
-	private String logradouro;
-	private String numero;
-	private String complemento;
-	private String bairro;
-	private String cep;
+	private Endereco[] enderecos;
+	
+	public Endereco[] getEnderecos() {
+		return enderecos;
+	}
+
+
+
+	public void setEnderecos(Endereco[] enderecos) {
+		this.enderecos = enderecos;
+	}
+
+
+
+	private String outrasInfo;
 	
 	private Long cidadeId;
-
+	
+	
+	//testes
+	private Long estadoId;	
+	private String nome_cidade;
+	private String uf;
 
 	
 		
@@ -86,13 +103,7 @@ public class FuncionarioNewDTO implements Serializable {
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
 
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
 
 	public String getSexo() {
 		return sexo;
@@ -105,46 +116,6 @@ public class FuncionarioNewDTO implements Serializable {
 
 
 
-
-	public String getLogradouro() {
-		return logradouro;
-	}
-
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-
-	public String getNumero() {
-		return numero;
-	}
-
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
-
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getBairro() {
-		return bairro;
-	}
-
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-
-	public String getCep() {
-		return cep;
-	}
-
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
 
 	public Long getCidadeId() {
 		return cidadeId;
@@ -162,6 +133,54 @@ public class FuncionarioNewDTO implements Serializable {
 		this.podeViajar = podeViajar;
 	}
 
+
+	public Long getEstadoId() {
+		return estadoId;
+	}
+
+
+
+	public void setEstadoId(Long estadoId) {
+		this.estadoId = estadoId;
+	}
+
+
+
+	public String getNome_cidade() {
+		return nome_cidade;
+	}
+
+
+
+	public void setNome_cidade(String nome_cidade) {
+		this.nome_cidade = nome_cidade;
+	}
+
+
+
+	public String getUf() {
+		return uf;
+	}
+
+
+
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
+
+
+
+	public String getOutrasInfo() {
+		return outrasInfo;
+	}
+
+
+
+	public void setOutrasInfo(String outrasInfo) {
+		this.outrasInfo = outrasInfo;
+	}
+
+
 	public String [] getCoding() {
 		 
 		return coding;
@@ -171,6 +190,22 @@ public class FuncionarioNewDTO implements Serializable {
 		
 		this.coding = coding;
 	}
+	
+	
+
+	public String [] getEstadoCivil() {
+		return estadoCivil;
+	}
+
+
+
+	public void setEstadoCivil(String [] estadoCivil) {
+		this.estadoCivil = estadoCivil;
+	}
+
+
+
+
 
 
 

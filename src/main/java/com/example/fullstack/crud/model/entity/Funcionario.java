@@ -32,10 +32,12 @@ public class Funcionario implements Serializable{
 	@JsonFormat(pattern="dd/MM/yyyy HH:mm")
 	private Date dataNascimento;
 	
-	private String estadoCivil; //radio button
+	private String [] estadoCivil; //dropdownlist
 	private String sexo; //radio button
 	private String [] coding; //check box
 	private boolean podeViajar; //switch
+	
+	private String outrasInfo;
 	
 	
 	
@@ -56,7 +58,7 @@ public class Funcionario implements Serializable{
 
 
 	public Funcionario(Long id, String nome, String email, String cpf, String telefone, Date dataNascimento,
-			String estadoCivil, String sexo, String [] coding, boolean podeViajar) {
+			String [] estadoCivil, String sexo, String [] coding, boolean podeViajar, String outrasInfo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -68,7 +70,7 @@ public class Funcionario implements Serializable{
 		this.sexo = sexo;
 		this.coding = coding;
 		this.podeViajar = podeViajar;
-		
+		this.outrasInfo = outrasInfo;
 		
 	}
 	
@@ -150,14 +152,6 @@ public class Funcionario implements Serializable{
 	}
 	
 	
-	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
-	}
 
 
 	public String getSexo() {
@@ -207,6 +201,34 @@ public class Funcionario implements Serializable{
 
 	public void setDisponivelViagens(boolean disponivelViagens) {
 		this.podeViajar = disponivelViagens;
+	}
+
+
+
+
+	public String getOutrasInfo() {
+		return outrasInfo;
+	}
+
+
+
+
+	public void setOutrasInfo(String outrasInfo) {
+		this.outrasInfo = outrasInfo;
+	}
+
+
+
+
+	public String [] getEstadoCivil() {
+		return estadoCivil;
+	}
+
+
+
+
+	public void setEstadoCivil(String [] estadoCivil) {
+		this.estadoCivil = estadoCivil;
 	}
 
 

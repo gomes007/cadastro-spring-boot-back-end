@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.example.fullstack.crud.api.dto.FuncionarioDTO;
 import com.example.fullstack.crud.api.dto.FuncionarioNewDTO;
+import com.example.fullstack.crud.model.entity.Endereco;
 import com.example.fullstack.crud.model.entity.Funcionario;
 
 
@@ -30,6 +31,8 @@ public interface FuncionarioService {
 	
 	
 	Funcionario fromDTO(FuncionarioNewDTO objDTO);
+
+	void salvarEnderecos(Funcionario funcionario, Endereco[] enderecos);
 	
 
 }

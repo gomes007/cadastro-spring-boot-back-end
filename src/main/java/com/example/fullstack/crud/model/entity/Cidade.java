@@ -3,6 +3,7 @@ package com.example.fullstack.crud.model.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,7 @@ public class Cidade implements Serializable{
 	private String nome_cidade;
 	
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "estado_id")
 	private Estado estado;
 	
@@ -39,6 +40,7 @@ public class Cidade implements Serializable{
 		this.id = id;
 		this.nome_cidade = nome_cidade;
 		this.estado = estado;
+
 	}
 
 
@@ -56,14 +58,21 @@ public class Cidade implements Serializable{
 	}
 
 
-	public String getNome() {
+
+
+
+	public String getNome_cidade() {
 		return nome_cidade;
 	}
 
 
-	public void setNome(String nome) {
-		this.nome_cidade = nome;
+
+
+	public void setNome_cidade(String nome_cidade) {
+		this.nome_cidade = nome_cidade;
 	}
+
+
 
 
 	public Estado getEstado() {
